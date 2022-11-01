@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Container} from '@material-ui/core'
+import {GoogleOAuthProvider} from '@react-oauth/google'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
+import PostDetails from './components/PostDetails/PostDetails'
+
+import Navbar from './components/Navbar/Navbar'
+import Home from './components/Home/Home'
+import Auth from './components/Auth/Auth'
+
+const App = () =>{
+    const user = JSON.parse(localStorage.getItem('profile'))
+
+    return(
+        <BrowserRouter>
+        <GoogleOAuthProvider clientId="875519259731-7d3104b64bb8o09alo10p19q6lkm8m89.apps.googleusercontent.com">
+            <Container maxWidth="xl">
+                <Navbar/>
+                <Routes>
+                    <Route path="/" element={ <Navigate to="/posts" /> }></Route>
+                    <Route path="/posts" element={<Home/>}></Route>
+                    <Route path="/posts/search" element={<Home/>}></Route>
+                    <Route path="/posts/:id" element={<PostDetails/>}></Route>
+                    <Route path="/auth" element={!user ? (<Auth/>) : (<Navigate to="/posts"/>)}></Route>
+                </Routes>
+            </Container>
+        </GoogleOAuthProvider>
+        </BrowserRouter>
+    )
 }
 
 export default App;
