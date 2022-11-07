@@ -1,5 +1,6 @@
 import axios from 'axios'
-const API = axios.create({ baseURL: 'http://localhost:5000'})
+// const API = axios.create({ baseURL: 'http://localhost:5000'})
+const API = axios.create({ baseURL: 'https://memories-api-fe61.onrender.com'})
 
 //Happens before each request. Why we need this? SO we can send our token to our backend so we can verify that we are login
 API.interceptors.request.use((req)=>{
