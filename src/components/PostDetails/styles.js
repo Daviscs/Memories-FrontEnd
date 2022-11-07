@@ -46,5 +46,8 @@ export default makeStyles((theme) => ({
         height: '200px',
         overflowY: 'auto',
         marginRight: '30px'
+    },
+    individualComments:{
+        backgroundColor: '#F0F0F0'
     }
 }))
